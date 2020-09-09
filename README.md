@@ -1,6 +1,6 @@
 # SPBU FLT-2020
- - CI:
-[![Build Status](https://travis-ci.org/github/AlekseiPrivalihin/FormalLanguageTheory/pull_requests)](https://travis-ci.org/github/AlekseiPrivalihin/FormalLanguageTheory/pull_requests)
+ - [CI](https://travis-ci.com/github/AlanGamaonov/spbu-gdb2020)
+   
  - Only Docker and git are required to run the tests
  - Clone the repo 
  - Run:
