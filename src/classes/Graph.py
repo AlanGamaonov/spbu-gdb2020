@@ -11,7 +11,7 @@ class Graph():
 
 
     def read_graph_from_file(self, file_path):
-        read edges from file
+        #read edges from file
         graph_file = open(file_path, 'r')
         edges = graph_file.read().rstrip().split('\n')
         graph_file.close()
@@ -39,6 +39,7 @@ class Graph():
 
 
     def parse_regex(self, file_path):
+        #read regex from file
         regex_file = open(file_path, 'r')
         regex = Regex(regex_file.read().rstrip())
         regex_file.close()
