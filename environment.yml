@@ -1,0 +1,7 @@
+name: flt_env
+channels:
+  - conda-forge
+dependencies:
+  # last python version will be installed
+  - pygraphblas
+  - pytest
