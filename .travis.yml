@@ -1,4 +1,4 @@
 services: docker
 script:
-  - docker build -t flt .
+  - docker build --build-arg graph_file="tests/hw2_test_graph.txt" --build-arg regex_file="tests/hw2_test_regex.txt" -t flt .
   - docker run flt
