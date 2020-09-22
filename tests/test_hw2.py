@@ -1,5 +1,5 @@
-from src.classes.Graph import Graph
-from src.alg.intersection_and_reachability import *
+from classes.Graph import Graph
+from alg.intersection_and_reachability import *
 from pygraphblas import *
 
 
@@ -18,4 +18,3 @@ def test_intersection_and_reachability():
     aut.parse_regex("tests/hw2_test_regex1.txt")
     intersection = get_intersection(aut, graph)
     assert intersection.vertices_count == 35
-#end of test_intersection_and_reachability
