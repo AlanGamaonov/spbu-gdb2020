@@ -13,11 +13,19 @@ def test_intersection_and_reachability():
     reachability_matrix = main.Utils.get_total_reachability(intersection)
     assert graph.label_matrices["mama"] == intersection.label_matrices["mama"]
     assert reachability_matrix == Matrix.dense(BOOL, 5, 5).full(True)
+    print()
 
     graph.read_graph_from_file("tests/hw2_test_graph1.txt")
     aut.parse_regex("tests/hw2_test_regex1.txt")
     intersection = main.Utils.get_intersection(aut, graph)
     assert intersection.vertices_count == 35
+    print()
+
+    graph.read_graph_from_file("tests/hw2_test_graph2.txt")
+    aut.parse_regex("tests/hw2_test_regex1.txt")
+    intersection = main.Utils.get_intersection(graph, aut)
+    assert not intersection.label_matrices
+    print()
 
 
 def test_matrix_prod():
