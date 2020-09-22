@@ -2,6 +2,7 @@
  - [Travis CI](https://travis-ci.com/github/AlanGamaonov/spbu-gdb2020)
 
  Note: Linux only!
+ 
  Create and activate conda environment and install libraries: <br />
  `conda install -c conda-forge pygraphblas ; pip3 install pyformlang`
  
