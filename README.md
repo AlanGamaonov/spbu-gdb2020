@@ -1,7 +1,7 @@
 # SPBU FLT-2020
  - [CI](https://travis-ci.com/github/AlanGamaonov/spbu-gdb2020)
 
- - Linux only!
+ Note: Linux only!
  Create and activate conda environment and install libraries:
  `conda install -c conda-forge pygraphblas ; pip3 install pyformlang`
  
