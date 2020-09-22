@@ -1,18 +1,17 @@
-from pygraphblas.matrix import Matrix
-from pygraphblas.types import BOOL
-from src.classes.Graph import Graph
+from pygraphblas import Matrix, BOOL, Vector
+from classes.Graph import Graph
+
 
 def get_transitive_closure(graph):
     matrix = Matrix.sparse(BOOL, graph.vertices_count, graph.vertices_count)
 
     for label_matrix in graph.label_matrices.values():
-            matrix = matrix | label_matrix
+        matrix = matrix | label_matrix
 
     for k in range(graph.vertices_count):
-            matrix += matrix @ matrix
+        matrix += matrix @ matrix
 
     return matrix
-#end of get_transitive_closure
 
 
 def get_intersection(graph1, graph2):
@@ -32,13 +31,11 @@ def get_intersection(graph1, graph2):
             result.label_matrices[label] = graph1.label_matrices[label].kronecker(graph2.label_matrices[label])
 
     return result
-#end of get_intersection
 
 
-#just for uniformity
+# just for uniformity
 def get_total_reachability(graph):
     return get_transitive_closure(graph)
-#end of get_total_reachability
 
 
 def get_reachability_from_set(graph, set):
@@ -49,7 +46,6 @@ def get_reachability_from_set(graph, set):
             result.assign_row(i, Vector.sparse(BOOL, graph.vertices_count).full(0))
 
     return result
-#end of get_reachability_from_set
 
 
 def get_reachability_from_set_to_set(graph, set_from, set_to):
@@ -57,9 +53,8 @@ def get_reachability_from_set_to_set(graph, set_from, set_to):
 
     for i in range(graph.vertices_count):
         if i not in set_from:
-            res.assign_row(i, Vector.sparse(BOOL, graph.vertices_count).full(0))
+            result.assign_row(i, Vector.sparse(BOOL, graph.vertices_count).full(0))
         if i not in set_to:
-            res.assign_col(i, Vector.sparse(BOOL, graph.vertices_count).full(0))
+            result.assign_col(i, Vector.sparse(BOOL, graph.vertices_count).full(0))
 
     return result
-#end of get_reachability_from_set_to_set
