@@ -3,6 +3,7 @@
 
  Note: Linux only!
  Create and activate conda environment and install libraries:
+ 
  `conda install -c conda-forge pygraphblas ; pip3 install pyformlang`
  
  After that you can run python scrypt:
