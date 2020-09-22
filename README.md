@@ -1,10 +1,11 @@
 # SPBU FLT-2020
- - [CI](https://travis-ci.com/github/AlanGamaonov/spbu-gdb2020)
+ - [Travis CI](https://travis-ci.com/github/AlanGamaonov/spbu-gdb2020)
 
- - Only Docker and git are required to run the tests
- - Clone the repo 
- - Run:
-    `docker build --build-arg graph_file=path --build-arg regex_file=path -t flt .`
- - Note that file must be in repos folder
- - Run:
-    `docker run flt`
+ Note: Linux only! <br />
+ 
+ Create and activate conda environment and install libraries: <br />
+ `conda install -c conda-forge pygraphblas ; pip3 install pyformlang`
+ 
+ After that you can run python scrypt: <br />
+ `python <path>/src/main.py <arg1> <arg2>`
+
