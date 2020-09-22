@@ -1,6 +1,6 @@
 import sys
 from classes.Graph import Graph
-from alg import intersection_and_reachability
+from alg.Utils import Utils
 
 
 if __name__ == '__main__':
