@@ -1,6 +1,7 @@
 from pyformlang.finite_automaton import State, Symbol, DeterministicFiniteAutomaton
 from pygraphblas import Matrix
 
+
 def test_matrix_prod():
     A = Matrix.from_lists(
         [0, 0, 0, 1, 1, 1, 2, 2, 2],

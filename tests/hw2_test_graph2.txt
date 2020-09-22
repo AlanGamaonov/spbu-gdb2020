@@ -1,5 +1,0 @@
-0 mama 1
-1 mama 2
-2 mama 3
-3 mama 4
-4 mama 0
