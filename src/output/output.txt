@@ -1,0 +1,54 @@
+LUBM300   q7_7   1.8e-05
+LUBM300   q11_4_7   2.5e-05
+LUBM300   q10_3_3   2.2e-05
+LUBM300   q10_5_6   3e-05
+LUBM300   q7_6   1.7e-05
+LUBM300   q7_0   1.2e-05
+LUBM300   q6_9   1.3e-05
+LUBM300   q10_2_4   2.1e-05
+LUBM300   q_14_5   2.9e-05
+LUBM300   q9_5_0   2.6e-05
+
+LUBM500   q7_7   1.7e-05
+LUBM500   q11_4_7   2.1e-05
+LUBM500   q10_3_3   2.2e-05
+LUBM500   q10_5_6   3e-05
+LUBM500   q7_6   1.6e-05
+LUBM500   q7_0   1.5e-05
+LUBM500   q6_9   1.3e-05
+LUBM500   q10_2_4   2.3e-05
+LUBM500   q_14_5   3.1e-05
+LUBM500   q9_5_0   2.7e-05
+
+LUBM1M   q7_7   1.7e-05
+LUBM1M   q11_4_7   2.1e-05
+LUBM1M   q10_3_3   2.1e-05
+LUBM1M   q10_5_6   3.1e-05
+LUBM1M   q7_6   1.6e-05
+LUBM1M   q7_0   1.6e-05
+LUBM1M   q6_9   1.2e-05
+LUBM1M   q10_2_4   2.2e-05
+LUBM1M   q_14_5   3.6e-05
+LUBM1M   q9_5_0   2.6e-05
+
+LUBM1.5M   q7_7   1.7e-05
+LUBM1.5M   q11_4_7   2.1e-05
+LUBM1.5M   q10_3_3   2e-05
+LUBM1.5M   q10_5_6   2.9e-05
+LUBM1.5M   q7_6   1.7e-05
+LUBM1.5M   q7_0   1.9e-05
+LUBM1.5M   q6_9   1.2e-05
+LUBM1.5M   q10_2_4   1.7e-05
+LUBM1.5M   q_14_5   3e-05
+LUBM1.5M   q9_5_0   2.6e-05
+
+LUBM1.9M   q7_7   1.9e-05
+LUBM1.9M   q11_4_7   2.1e-05
+LUBM1.9M   q10_3_3   2.1e-05
+LUBM1.9M   q10_5_6   3.4e-05
+LUBM1.9M   q7_6   1.8e-05
+LUBM1.9M   q7_0   2.2e-05
+LUBM1.9M   q6_9   1.2e-05
+LUBM1.9M   q10_2_4   1.7e-05
+LUBM1.9M   q_14_5   3e-05
+LUBM1.9M   q9_5_0   2.6e-05

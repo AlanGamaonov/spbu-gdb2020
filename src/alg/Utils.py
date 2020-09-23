@@ -89,34 +89,29 @@ class Utils:
 
     @staticmethod
     def measure_transitive_closure(iterations_num):
-        adj = timeit.repeat("Utils.get_transitive_closure_adj_matrix(graph)",
-                            setup="from __main__ import Utils, graph",
+        adj = timeit.repeat("Utils.get_transitive_closure_adj_matrix(intersection)",
+                            setup="from __main__ import Utils, intersection",
                             repeat=iterations_num,
                             number=1)
-        sqr = timeit.repeat("Utils.get_transitive_closure_squaring(graph)",
-                            setup="from __main__ import Utils, graph",
+        sqr = timeit.repeat("Utils.get_transitive_closure_squaring(intersection)",
+                            setup="from __main__ import Utils, intersection",
                             repeat=iterations_num,
                             number=1)
         average_adj = round(fmean(adj), 6)
-        dispersion_adj = round(variance(adj), 6)
         average_sqr = round(fmean(sqr), 6)
-        dispersion_sqr = round(variance(sqr), 6)
 
-        result = str(average_adj) + ' ' + str(dispersion_adj) + ' ' + str(average_sqr) + ' ' + str(dispersion_sqr)
-        print(result)
+        result = str(average_adj) + '   ' + str(average_sqr)
         return result
 
     @staticmethod
     def measure_intersection(iterations_num):
-        intersection = timeit.repeat("Utils.get_intersection(graph, aut)",
-                                     setup="from __main__ import Utils, graph, aut",
+        intersection = timeit.repeat("Utils.get_intersection(graph, automaton)",
+                                     setup="from __main__ import Utils, graph, automaton",
                                      repeat=iterations_num,
                                      number=1)
         average = round(fmean(intersection), 6)
-        dispersion = round(variance(intersection), 6)
 
-        result = str(average) + ' ' + str(dispersion)
-        print(result)
+        result = str(average)
         return result
 
     @staticmethod
@@ -126,8 +121,6 @@ class Utils:
                            repeat=iterations_num,
                            number=1)
         average = round(fmean(pr), 6)
-        dispersion = round(variance(pr), 6)
 
-        result = str(average) + ' ' + str(dispersion)
-        print(result)
+        result = str(average)
         return result
