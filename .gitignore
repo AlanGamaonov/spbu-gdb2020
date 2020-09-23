@@ -1,1 +1,5 @@
 /.pytest_cache/
+
+src/alg/__pycache__/Utils.cpython-38.pyc
+
+src/classes/__pycache__/Graph.cpython-38.pyc
