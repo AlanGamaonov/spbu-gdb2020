@@ -18,7 +18,7 @@ if __name__ == '__main__':
         graph_paths = ["LUBM300/LUBM300.txt", "LUBM500/LUBM500.txt", "LUBM1M/LUBM1M.txt", "LUBM1.5M/LUBM1.5M.txt",
                        "LUBM1.9M/LUBM1.9M.txt"]
 
-         for graph_path in graph_paths:
+        for graph_path in graph_paths:
             graph.read_graph_from_file(join(input_dir_path, graph_path))
 
             closure_result = Utils.measure_transitive_closure(iterations_num)
@@ -28,7 +28,7 @@ if __name__ == '__main__':
             output_file.write(graph_path + ' ' + str(nvals) + ' ' + closure_result + '\n')
             output_file.close()
 
-         for regex_folder_path in regex_folders_paths:
+        for regex_folder_path in regex_folders_paths:
             output_file = open(join(output_dir_path, "closure_regex.txt"), 'a')
             output_file.write(regex_folder_path + ':\n')
             output_file.close()
