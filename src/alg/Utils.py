@@ -1,7 +1,7 @@
 from pygraphblas import *
 from classes.Graph import Graph
+from statistics import fmean
 import timeit
-from statistics import fmean, variance
 
 
 class Utils:
