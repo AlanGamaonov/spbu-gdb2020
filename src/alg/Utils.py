@@ -1,6 +1,7 @@
 from pygraphblas import *
 from classes.Graph import Graph
 from statistics import fmean
+from pyformlang.cfg import CFG
 import timeit
 
 
@@ -124,3 +125,17 @@ class Utils:
 
         result = str(average)
         return result
+
+    @staticmethod
+    def read_grammar_from_file(file_path):
+        productions = []
+
+        with open(file_path, 'r') as file:
+            for line in file:
+                raw_current_production = line.split()
+                # "S a S b S" to "S -> a S b S"
+                current_production = raw_current_production[0] + ' -> ' + ' '.join(raw_current_production[1:])
+                productions.append(current_production)
+
+        productions = '\n'.join(productions)
+        return CFG.from_text(productions)

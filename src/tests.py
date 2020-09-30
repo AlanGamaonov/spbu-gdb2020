@@ -4,7 +4,7 @@ from pyformlang.finite_automaton import State, Symbol, DeterministicFiniteAutoma
 
 
 def test_CYK_a_and_b_equal_count():
-    grammar = main.read_grammar_from_file("tests/hw4_test_a_and_b_equal_count_CYK.txt")
+    grammar = main.Utils.read_grammar_from_file("tests/hw4_test_a_and_b_equal_count_CYK.txt")
 
     assert main.CYK(grammar, "aaabbb")
     assert main.CYK(grammar, "ababab")
@@ -14,7 +14,7 @@ def test_CYK_a_and_b_equal_count():
 
 
 def test_CYK_even_palindrome():
-    grammar = main.read_grammar_from_file("tests/hw4_test_even_palindrome_CYK.txt")
+    grammar = main.Utils.read_grammar_from_file("tests/hw4_test_even_palindrome_CYK.txt")
 
     assert main.CYK(grammar, "abba")
     assert main.CYK(grammar, "aaaa")
@@ -24,7 +24,7 @@ def test_CYK_even_palindrome():
 
 
 def test_hellings():
-    grammar = main.read_grammar_from_file("tests/hw4_test_hellings_grammar.txt")
+    grammar = main.Utils.read_grammar_from_file("tests/hw4_test_hellings_grammar.txt")
     graph = main.Graph()
     graph.read_graph_from_file("tests/hw4_test_hellings_graph.txt")
 

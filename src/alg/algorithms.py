@@ -3,20 +3,6 @@ from pyformlang.cfg import Terminal, CFG
 from collections import deque
 
 
-def read_grammar_from_file(file_path):
-    productions = []
-
-    with open(file_path, 'r') as file:
-        for line in file:
-            raw_current_production = line.split()
-            # "S a S b S" to "S -> a S b S"
-            current_production = raw_current_production[0] + ' -> ' + ' '.join(raw_current_production[1:])
-            productions.append(current_production)
-
-    productions = '\n'.join(productions)
-    return CFG.from_text(productions)
-
-
 def CYK(grammar, word):
     size = len(word)
     if size == 0:
