@@ -47,10 +47,22 @@ def hellings(grammar, graph):
 
     cfg = grammar.to_normal_form()
 
+    terminal_productions = set()
+    non_terminal_productions = set()
+
+    for production in cfg.productions:
+        if len(production.body) == 1:
+            terminal_productions.add(production)
+        else:
+            non_terminal_productions.add(production)
+
     for t, matrix in graph.label_matrices.items():
-        for production in cfg.productions:
+        for production in terminal_productions:
             if production.body == [Terminal(t)]:
-                result[production.head] = matrix
+                if production.head not in result:
+                    result[production.head] = matrix.dup()
+                else:
+                    result[production.head] += matrix.dup()
 
     for variable, matrix in result.items():
         for i, j, _ in zip(*matrix.to_lists()):
@@ -62,7 +74,7 @@ def hellings(grammar, graph):
 
         for new_variable, matrix in result.items():
             for new_start, _ in matrix[:, start]:
-                for production in cfg.productions:
+                for production in non_terminal_productions:
                     if (
                             len(production.body) == 2
                             and production.body[0] == new_variable
@@ -77,7 +89,7 @@ def hellings(grammar, graph):
 
         for new_variable, matrix in result.items():
             for new_end, _ in matrix[end, :]:
-                for production in cfg.productions:
+                for production in non_terminal_productions:
                     if (
                             len(production.body) == 2
                             and production.body[0] == variable
