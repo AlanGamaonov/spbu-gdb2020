@@ -3,19 +3,65 @@ from pygraphblas import *
 from pyformlang.finite_automaton import State, Symbol, DeterministicFiniteAutomaton
 
 
-def test_1():
+def test_cfpq_matrix_prod1():
+    grammar = main.Utils.read_grammar_from_file("tests/hw5_test_cfpq_matrix_prod1_grammar.txt")
     graph = main.Graph()
-    graph.read_graph_from_file("tests/graph.txt")
+    graph.read_graph_from_file("tests/hw5_test_cfpq_matrix_prod1_graph.txt")
 
-    grammar = main.Utils.read_grammar_from_file("tests/hw5_test_empty_word_grammar.txt")
-    cnf = main.Utils.get_cnf_from_grammar(grammar)
+    expected = main.hellings(grammar, graph)
+    actual = main.Utils.cfpq_matrix_product(graph, grammar)
 
-    h = main.hellings(cnf, graph)
-    m = main.Utils.cfpq_bool_matrix_product(graph, cnf)
-    t = main.Utils.cfpq_tensor_product(graph, grammar)
+    assert expected == actual
 
-    #assert h.iseq(m)
-    assert h.iseq(t)
+    actual = main.Utils.cfpq_tensor_product(graph, grammar)
+    assert expected == actual
+
+    actual = Matrix.sparse(BOOL, 3, 3).full(True)
+    assert expected == actual
+
+
+def test_cfpq_matrix_prod2():
+    grammar = main.Utils.read_grammar_from_file("tests/hw5_test_cfpq_matrix_prod2_grammar.txt")
+    graph = main.Graph()
+    graph.read_graph_from_file("tests/hw5_test_cfpq_matrix_prod1_graph.txt")
+
+    expected = main.hellings(grammar, graph)
+    actual = main.Utils.cfpq_matrix_product(graph, grammar)
+
+    assert expected == actual
+
+    actual = main.Utils.cfpq_tensor_product(graph, grammar)
+    assert expected == actual
+
+
+def test_cfpq_matrix_prod_empty():
+    grammar = main.Utils.read_grammar_from_file("tests/hw5_test_cfpq_matrix_prod1_grammar.txt")
+    graph = main.Graph()
+    graph.read_graph_from_file("tests/empty.txt")
+
+    expected = main.hellings(grammar, graph)
+    actual = main.Utils.cfpq_matrix_product(graph, grammar)
+
+    assert not expected
+    assert expected == actual
+
+    actual = main.Utils.cfpq_tensor_product(graph, grammar)
+    assert expected == actual
+
+
+def test_cfpq_matrix_prod3():
+    grammar = main.Utils.read_grammar_from_file("tests/hw5_test_cfpq_matrix_prod1_grammar.txt")
+    graph = main.Graph()
+    graph.read_graph_from_file("tests/hw5_test_cfpq_matrix_prod3_graph.txt")
+
+    expected = main.hellings(grammar, graph)
+    actual = main.Utils.cfpq_matrix_product(graph, grammar)
+
+    assert expected.nvals == 1
+    assert expected == actual
+
+    actual = main.Utils.cfpq_tensor_product(graph, grammar)
+    assert expected == actual
 
 
 def test_CYK_a_and_b_equal_count():

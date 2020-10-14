@@ -21,6 +21,8 @@ class Graph:
         # get vertices count
         max_vertex = 0
         for edge in edges:
+            if edge == '':
+                return
             start, label, end = edge.split(' ')
             max_vertex = max([max_vertex, int(start), int(end)])
         self.vertices_count = max_vertex + 1
