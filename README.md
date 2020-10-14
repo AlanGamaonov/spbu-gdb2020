@@ -1,5 +1,5 @@
 # SPBU FLT-2020
- - [Travis CI](https://travis-ci.com/github/AlanGamaonov/spbu-gdb2020)
+ - [Travis CI](https://travis-ci.com/github/AlanGamaonov/spbu-gdb2020/builds)
 
  Note: Linux only! <br />
  Note: You must install [pygrphblas v3.3.3](https://github.com/michelp/pygraphblas) manually <br />
