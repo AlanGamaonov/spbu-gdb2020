@@ -3,6 +3,21 @@ from pygraphblas import *
 from pyformlang.finite_automaton import State, Symbol, DeterministicFiniteAutomaton
 
 
+def test_1():
+    graph = main.Graph()
+    graph.read_graph_from_file("tests/graph.txt")
+
+    grammar = main.Utils.read_grammar_from_file("tests/hw5_test_empty_word_grammar.txt")
+    cnf = main.Utils.get_cnf_from_grammar(grammar)
+
+    h = main.hellings(cnf, graph)
+    m = main.Utils.cfpq_bool_matrix_product(graph, cnf)
+    t = main.Utils.cfpq_tensor_product(graph, grammar)
+
+    #assert h.iseq(m)
+    assert h.iseq(t)
+
+
 def test_CYK_a_and_b_equal_count():
     grammar = main.Utils.read_grammar_from_file("tests/hw4_test_a_and_b_equal_count_CYK.txt")
 

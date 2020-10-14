@@ -1,6 +1,7 @@
 from pygraphblas.matrix import Matrix
 from pygraphblas.types import BOOL
 from pyformlang.regular_expression import Regex
+from pyformlang.cfg import CFG
 
 
 class Graph:
@@ -75,3 +76,14 @@ class Graph:
         for state in dfa._final_states:
             self.terminal_vertices.add(states[state])
         return self
+
+    def get_copy(self):
+        result = Graph()
+        result.vertices_count = self.vertices_count
+        result.start_vertices = self.start_vertices.copy()
+        result.terminal_vertices = self.terminal_vertices.copy()
+
+        for label in self.label_matrices:
+            result.label_matrices[label] = self.label_matrices[label].dup()
+
+        return result
