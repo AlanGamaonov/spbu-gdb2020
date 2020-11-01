@@ -23,13 +23,13 @@ class Graph:
         for edge in edges:
             if edge == '':
                 return
-            start, label, end = edge.split(' ')
+            start, label, end = edge.rstrip().split(' ')
             max_vertex = max([max_vertex, int(start), int(end)])
         self.vertices_count = max_vertex + 1
 
         # init label_matrices
         for edge in edges:
-            i, label, j = edge.split(" ")
+            i, label, j = edge.rstrip().split(" ")
             if label in self.label_matrices:
                 self.label_matrices[label][int(i), int(j)] = True
             else:

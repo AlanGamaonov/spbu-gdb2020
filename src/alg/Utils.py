@@ -127,6 +127,33 @@ class Utils:
         return result
 
     @staticmethod
+    def measure_matrix_product(iterations_num):
+        prod = timeit.repeat("Utils.cfpq_matrix_product(graph, grammar)",
+                             setup="from __main__ import Utils, graph, grammar",
+                             repeat=iterations_num,
+                             number=1)
+        average = round(fmean(prod), 6)
+        return str(average).replace('.', ',')
+
+    @staticmethod
+    def measure_tensor_product(iterations_num):
+        prod = timeit.repeat("Utils.cfpq_tensor_product(graph, grammar)",
+                             setup="from __main__ import Utils, graph, grammar",
+                             repeat=iterations_num,
+                             number=1)
+        average = round(fmean(prod), 6)
+        return str(average).replace('.', ',')
+
+    @staticmethod
+    def measure_hellings(iterations_num):
+        prod = timeit.repeat("hellings(grammar, graph)",
+                             setup="from __main__ import hellings, graph, grammar",
+                             repeat=iterations_num,
+                             number=1)
+        average = round(fmean(prod), 6)
+        return str(average).replace('.', ',')
+
+    @staticmethod
     def read_grammar_from_file(file_path):
         productions = []
 
