@@ -1,7 +1,7 @@
 from pygraphblas import *
 from classes.Graph import Graph
 from statistics import fmean
-from pyformlang.cfg import CFG
+from pyformlang.cfg import CFG, Variable, Production, Terminal
 import timeit
 
 
@@ -139,3 +139,116 @@ class Utils:
 
         productions = '\n'.join(productions)
         return CFG.from_text(productions)
+
+    @staticmethod
+    def cfpq_matrix_product(graph: Graph, grammar: CFG):
+        if graph.vertices_count == 0:
+            return False
+
+        result = dict()
+        terminal_productions = set()
+        non_terminal_productions = set()
+
+        if grammar.generate_epsilon():
+            matrix = Matrix.sparse(BOOL, graph.vertices_count, graph.vertices_count)
+            matrix += Matrix.identity(BOOL, graph.vertices_count)
+            result[grammar.start_symbol] = matrix
+
+        cfg = grammar.to_normal_form()
+
+        for production in cfg.productions:
+            if len(production.body) == 1:
+                terminal_productions.add(production)
+            else:
+                non_terminal_productions.add(production)
+
+        for t, matrix in graph.label_matrices.items():
+            for production in terminal_productions:
+                if production.body == [Terminal(t)]:
+                    if production.head not in result:
+                        result[production.head] = matrix.dup()
+                    else:
+                        result[production.head] += matrix.dup()
+
+        old_changed = set()
+        new_changed = cfg.variables
+
+        while len(new_changed) > 0:
+            old_changed = new_changed
+            new_changed = set()
+
+            for production in non_terminal_productions:
+                if production.body[0] not in result or production.body[1] not in result:
+                    continue
+
+                if (
+                        production.body[0] in old_changed
+                        or production.body[1] in old_changed
+                ):
+                    matrix = result.get(production.head, Matrix.sparse(BOOL, graph.vertices_count, graph.vertices_count))
+                    old_nvals = matrix.nvals
+                    result[production.head] = matrix + (result[production.body[0]] @ result[production.body[1]])
+
+                    if result[production.head].nvals != old_nvals:
+                        new_changed.add(production.head)
+
+        return result.get(cfg.start_symbol, Matrix.sparse(BOOL, graph.vertices_count, graph.vertices_count))
+
+    @staticmethod
+    def cfpq_tensor_product(graph: Graph, grammar: CFG):
+        if graph.vertices_count == 0:
+            return False
+
+        result = graph.get_copy()
+
+        rfa = Graph()
+        rfa_heads = dict()
+
+        rfa.vertices_count = sum([len(production.body) + 1 for production in grammar.productions])
+        index = 0
+        for production in grammar.productions:
+            start_state = index
+            terminal_state = index + len(production.body)
+
+            rfa.start_vertices.add(start_state)
+            rfa.terminal_vertices.add(terminal_state)
+            rfa_heads[(start_state, terminal_state)] = production.head.value
+
+            for variable in production.body:
+                matrix = rfa.label_matrices.get(variable.value, Matrix.sparse(BOOL, rfa.vertices_count, rfa.vertices_count))
+                matrix[index, index + 1] = True
+                rfa.label_matrices[variable.value] = matrix
+                index += 1
+
+            index += 1
+
+        for production in grammar.productions:
+            if len(production.body) == 0:
+                matrix = Matrix.sparse(BOOL, graph.vertices_count, graph.vertices_count)
+                matrix += Matrix.identity(BOOL, graph.vertices_count)
+
+                result.label_matrices[production.head] = matrix
+
+        changed = True
+        while changed:
+            changed = False
+            intersection = Utils.get_intersection(rfa, result)
+            closure = Utils.get_transitive_closure_squaring(intersection)
+
+            for i, j, _ in zip(*closure.to_lists()):
+                rfa_from, rfa_to = i // result.vertices_count, j // result.vertices_count
+                graph_from, graph_to = i % result.vertices_count, j % result.vertices_count
+
+                if (rfa_from, rfa_to) not in rfa_heads:
+                    continue
+
+                variable = rfa_heads[(rfa_from, rfa_to)]
+
+                matrix = result.label_matrices.get(variable, Matrix.sparse(BOOL, graph.vertices_count, graph.vertices_count))
+
+                if matrix.get(graph_from, graph_to) is None:
+                    changed = True
+                    matrix[graph_from, graph_to] = True
+                    result.label_matrices[variable] = matrix
+
+        return result.label_matrices.get(grammar.start_symbol, Matrix.sparse(BOOL, graph.vertices_count, graph.vertices_count))
